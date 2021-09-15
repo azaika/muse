@@ -34,11 +34,12 @@ export default class implements Command {
       await msg.channel.send(errorMsg('incorrect number of arguments'));
       return;
     }
-
-    if (msg.author.id !== msg.guild!.owner!.id) {
+    /* Disabling guild owner check
+    if (msg.author.id !== msg.guild!.ownerID) {
       await msg.channel.send(errorMsg('not authorized'));
       return;
     }
+    */
 
     switch (setting) {
       case 'prefix': {

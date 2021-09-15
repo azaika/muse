@@ -4,6 +4,7 @@ import {inject, injectable} from 'inversify';
 import PlayerManager from '../managers/player';
 import errorMsg from '../utils/error-msg';
 import Command from '.';
+import {STATUS} from '../services/player';
 
 @injectable()
 export default class implements Command {
@@ -27,6 +28,11 @@ export default class implements Command {
     if (!player.voiceConnection) {
       await msg.channel.send(errorMsg('not connected'));
       return;
+    }
+
+    player.clear();
+    if (player.status === STATUS.PLAYING) {
+      await player.forward(1);
     }
 
     player.disconnect();

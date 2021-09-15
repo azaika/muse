@@ -44,7 +44,9 @@ export default class implements Command {
 
     const player = this.playerManager.get(msg.guild!.id);
 
+    /* Disabling queue size checking
     const queueOldSize = player.queueSize();
+    */
     const wasPlayingSong = player.getCurrent() !== null;
 
     if (args.length === 0) {
@@ -147,7 +149,7 @@ export default class implements Command {
       await res.stop(`u betcha, **${firstSong.title}** and ${newSongs.length - 1} other songs were added to the queue${extraMsg}`);
     }
 
-    if (queueOldSize === 0 && !wasPlayingSong) {
+    if (player.status !== STATUS.PLAYING) {
       // Only auto-play if queue was empty before and nothing was playing
       if (player.voiceConnection === null) {
         await player.connect(targetVoiceChannel);

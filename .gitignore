@@ -2,6 +2,7 @@ data
 .DS_Store
 dist
 dts
+package-lock.json
 
 # Logs
 logs
@@ -107,3 +108,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# VSCode files
+.vscode
