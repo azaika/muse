@@ -213,28 +213,9 @@ export default class {
     return this.queue.slice(this.queuePosition + 1);
   }
 
-  add(song: QueuedSong, {immediate = false} = {}): void {
-    if (song.playlist) {
-      // Add to end of queue
-      this.queue.push(song);
-    } else {
-      // Not from playlist, add immediately
-      let insertAt = this.queuePosition + 1;
-
-      if (!immediate) {
-      // Loop until playlist song
-        this.queue.some(song => {
-          if (song.playlist) {
-            return true;
-          }
-
-          insertAt++;
-          return false;
-        });
-      }
-
-      this.queue = [...this.queue.slice(0, insertAt), song, ...this.queue.slice(insertAt)];
-    }
+  add(song: QueuedSong, {index = -1} = {}): void {
+    let insertAt = (index < 0 ? this.queue.length + 1 + index : this.queuePosition + index + 1);
+    this.queue = [...this.queue.slice(0, insertAt), song, ...this.queue.slice(insertAt)];
   }
 
   shuffle(): void {

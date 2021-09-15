@@ -135,7 +135,16 @@ export default class implements Command {
       return;
     }
 
-    newSongs.forEach(song => player.add(song, {immediate: addToFrontOfQueue}));
+    newSongs.forEach((song, index) => {
+      let i = 0;
+      if (addToFrontOfQueue) {
+        i = (song.playlist ? index : 0);
+      } else {
+        i = -1;
+      }
+
+      player.add(song, {index: i});
+    });
 
     const firstSong = newSongs[0];
 

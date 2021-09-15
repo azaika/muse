@@ -67,7 +67,7 @@ export default class {
     const isPlaying = player.getCurrent() !== null;
     let oldPosition = 0;
 
-    player.add(song, {immediate: true});
+    player.add(song, {index: 0});
 
     if (isPlaying) {
       oldPosition = player.getPosition();
